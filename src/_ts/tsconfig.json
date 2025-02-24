@@ -1,0 +1,10 @@
+{
+  "extends": "@tsconfig/recommended",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "lib": ["dom", "esnext"],
+    "module": "esnext",
+    "noEmit": true,
+    "target": "esnext"
+  }
+}
