@@ -3,3 +3,5 @@
 .wrangler
 dist/
 node_modules/
+public/srv/script.js
+public/srv/style.css
