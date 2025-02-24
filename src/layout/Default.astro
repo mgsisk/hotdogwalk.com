@@ -1,0 +1,67 @@
+---
+import Header from "@parts/header.astro"
+import Partners from "@parts/partners.astro"
+
+interface Props {
+  frontmatter?: {[index: string]: any},
+  url: string,
+  title: string,
+  excerpt: string,
+  hero?: boolean,
+}
+
+const {url, title, excerpt, hero = false} = Astro.props.frontmatter ? Astro.props.frontmatter : Astro.props
+const canonicalUrl = `https://hotdogwalk.com${url}`
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1,width=device-width">
+    <meta name="description" property="og:description" content={excerpt}>
+    {title !== "Home" ? <title>{title} • Kalamazoo Hot Dog Walk</title> : <title>Kalamazoo Hot Dog Walk</title>}
+    <link rel="canonical" href={canonicalUrl}>
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/srv/style.css">
+    {url === "/register" ? <script is:inline>
+      fetch("/api/dates")
+        .then((response) => response.json())
+        .then((data) => {
+          const open = Date.parse(data.open);
+          const close = Date.parse(data.close);
+          const now = (new Date()).valueOf();
+          const { searchParams } = new URL(location.href);
+
+          if (open < now && now < close) {
+            return;
+          } else if (searchParams.get(`vip${data.walk.split('-').shift()}`) !== null) {
+            return;
+          }
+
+          location.assign("/");
+        })
+    </script> : null}
+  </head>
+  <body id="top">
+    <Header hero={hero}/>
+    <main id="main">
+      {title !== "Home" ? <h1>{title}</h1> : <h1>Kalamazoo Hot Dog Walk</h1>}
+      <slot/>
+    </main>
+    <Partners/>
+    <nav class="vw-100">
+      <h2>Navigation</h2>
+      <ul>
+        <li><a href="/#registration-tips">Tips</a></li>
+        <li><a href="/#partners">Partners</a></li>
+        <li><a href="mailto:info@hotdogwalk.com">Contact</a></li>
+        <li><a href="https://hotdogwalk.us10.list-manage.com/subscribe/post?u=8817d2b3fe79871af376ea70f&id=44dc126d0f">Join the Mailing List</a></li>
+      </ul>
+    </nav>
+    <footer>
+      <p>© 2025 Kalamazoo Hot Dog Walk • <a href="/privacy">Privacy Policy</a></p>
+    </footer>
+    <script is:inline type="module" src="/srv/script.js"></script>
+    {url === "/success" ? <script is:inline>location.search.match(/^\?id=\d+$/)?fetch(`/api/success/${location.search.replace(/\D+/g,"")}`):0</script> : null}
+  </body>
+</html>
