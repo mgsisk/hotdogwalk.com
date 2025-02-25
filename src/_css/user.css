@@ -13,6 +13,12 @@ body {
   padding: 0 max(var(--vr), calc(50vw - 40ch));
 }
 
+nav a {
+  display: block;
+  padding: calc(var(--vr) / 2);
+  text-decoration: none;
+}
+
 a:--enter {
   color: var(--color-accent-02);
 }
@@ -213,54 +219,6 @@ nav ul {
   padding: 0;
 }
 
-nav a {
-  display: block;
-  padding: calc(var(--vr) / 2);
-  text-decoration: none;
-}
-
-.partners {
-  background: var(--color-accent);
-  color: var(--color-background);
-  padding: var(--vr) 0 0;
-}
-
-.partners h2 {
-  margin: 0;
-  text-align: center;
-}
-
-.partners ul {
-  align-items: center;
-  display: flex;
-  flex-flow: column;
-  gap: var(--vr);
-  justify-content: center;
-  list-style: none;
-  margin: 0;
-  padding: var(--vr);
-}
-
-.partners a {
-  display: block;
-  padding: var(--vr);
-  transition: transform var(--transition-duration)
-    var(--transition-timing-function);
-}
-
-.partners a:--enter {
-  transform: scale(1.1);
-}
-
-.partners svg {
-  height: auto;
-  width: 100%;
-}
-
-.partners :is(path, polygon, rect) {
-  fill: var(--color-background);
-}
-
 [type="checkbox"][onclick]:checked {
   background-color: var(--color-background);
   background-image: var(--icon-check-required);
@@ -370,6 +328,15 @@ nav a {
   color: var(--color-background);
 }
 
+.reg-shirts-event [disabled] + label,
+.reg-type [disabled] + label,
+.reg-type [disabled] + label:--enter,
+.reg-shirts-event [disabled] + label:--enter {
+  border: 0;
+  color: silver;
+  transition: none;
+}
+
 .reg-shirts-event [value="r"]:checked + label {
   background: var(--color-shirt-red);
   border-color: var(--color-shirt-red);
@@ -383,15 +350,6 @@ nav a {
 .reg-shirts-event [value="p"]:checked + label {
   background: var(--color-shirt-purple);
   border-color: var(--color-shirt-purple);
-}
-
-.reg-type [disabled] + label,
-.reg-type [disabled] + label:--enter,
-.reg-shirts-event [disabled] + label,
-.reg-shirts-event [disabled] + label:--enter {
-  border: 0;
-  color: silver;
-  transition: none;
 }
 
 .reg-type h2 strong {
@@ -436,8 +394,8 @@ nav a {
 
 .reg-shirts-event .count {
   display: block;
-  font-size: var(--font-size--1);
-  line-height: var(--line-height--1);
+  font-size: var(--font-size-m1);
+  line-height: var(--line-height-m1);
   text-align: center;
 }
 
@@ -487,34 +445,6 @@ nav a {
   width: 100%;
 }
 
-.reg-dogs .stop {
-  margin: 0 0 var(--vr);
-}
-
-.reg-dogs .toppings {
-  border: 0;
-  display: flex;
-  flex-flow: column;
-  height: 0;
-  overflow: hidden;
-  margin: 0;
-}
-
-.reg-dogs .toppings legend {
-  display: none;
-}
-
-.reg-dogs fieldset legend {
-  font-size: var(--font-size-02);
-  line-height: var(--line-height-02);
-}
-
-.reg-dogs :checked + label + .toppings {
-  height: auto;
-  overflow: visible;
-  padding: var(--vr) 0 0 calc(var(--vr) * 2);
-}
-
 #stripe-payment {
   border: 0.1rem solid;
   margin: 0 0 var(--vr);
@@ -525,15 +455,12 @@ nav a {
   align-items: center;
   backdrop-filter: blur(0.8rem);
   background: #fffc;
-  bottom: 0;
   content: "";
   display: grid;
-  left: 0;
+  inset: 0;
   opacity: 0;
   padding: var(--vr);
   position: fixed;
-  right: 0;
-  top: 0;
   transition: opacity var(--transition-duration)
     var(--transition-timing-function);
   z-index: 99;
@@ -559,14 +486,6 @@ nav a {
 }
 
 @media (--small) {
-  .partners ul {
-    flex-flow: row wrap;
-  }
-
-  .partners li {
-    flex: 0 1 calc(50% - var(--vr) / 2);
-  }
-
   .reg-info,
   .reg-shirts-event,
   .reg-shirts div {
@@ -575,21 +494,11 @@ nav a {
     margin: 0 0 var(--vr);
   }
 
-  .reg-dogs .toppings {
-    flex-flow: row wrap;
-    gap: var(--vr);
-  }
-
   .reg-info p,
   .reg-shirts div p,
-  .reg-shirts-event div,
-  .reg-dogs .toppings p {
+  .reg-shirts-event div {
     flex: 0 1 calc(50% - var(--vr) / 2);
     margin: 0;
-  }
-
-  .reg-dogs :checked + label + .toppings {
-    padding: var(--vr) 0 var(--vr) calc(var(--vr) * 2);
   }
 }
 
@@ -614,10 +523,6 @@ nav a {
 }
 
 @media (--medium) {
-  .partners li {
-    flex: 0 1 calc(33% - var(--vr) / 1.5);
-  }
-
   .reg-type {
     flex-flow: row wrap;
   }
@@ -630,8 +535,7 @@ nav a {
     flex: 0 1 100%;
   }
 
-  .reg-shirts div p,
-  .reg-dogs .toppings p {
+  .reg-shirts div p {
     flex: 0 1 calc(33% - var(--vr) / 1.5);
   }
 
@@ -641,10 +545,6 @@ nav a {
 }
 
 @media (--large) {
-  .partners li {
-    flex: 0 1 calc(25% - var(--vr));
-  }
-
   .reg-type div {
     flex: 0 1 calc(33% - var(--vr) / 1.5);
   }
