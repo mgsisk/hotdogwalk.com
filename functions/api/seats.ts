@@ -1,30 +1,27 @@
 export interface Env {
   DB: D1Database;
   open: string;
-  seats: number;
+  seats: string;
 }
 
 export const onRequestGet: PagesFunction<Env> = async (context) => {
-  let seats = context.env.seats;
+  let seats = parseInt(context.env.seats);
   const year = context.env.open.split("-").shift();
-  const preReg: Record<string, number> = await context.env.DB.prepare(
-    `select count(*) as count, created from walk${year} where ticket in ("event", "combo") and created <= ?`,
+  const count: Record<string, number> = await context.env.DB.prepare(
+    `select count() as total, count(case when created <= ? then 1 end) as pre from walk${year}`,
   )
     .bind(context.env.open.split("T").shift())
     .first();
-  const allReg: Record<string, number> = await context.env.DB.prepare(
-    `select count(*) as count from walk${year} where ticket in ("event", "combo")`,
-  ).first();
 
-  if (preReg && allReg) {
-    const difReg = allReg.count - preReg.count;
+  if (count.total && count.pre) {
+    const difReg = count.total - count.pre;
 
-    if (difReg < preReg.count) {
-      seats += preReg.count - difReg;
+    if (difReg < count.pre) {
+      seats += count.pre - difReg;
     }
-
-    seats -= allReg.count;
   }
+
+  seats -= count.total;
 
   return new Response(JSON.stringify({ seats: seats }), {
     headers: { "Content-Type": "application/json" },
