@@ -1,10 +1,17 @@
+const getError = (message: string): HTMLParagraphElement => {
+  const p = document.createElement("p");
+  p.textContent = message;
+
+  return p;
+};
+
 export default () => {
-  // @ts-ignore
+  // @ts-expect-error Stripe is loaded externally.
   if (typeof Stripe !== "function") {
     return;
   }
 
-  // @ts-ignore
+  // @ts-expect-error Stripe is loaded externally.
   const stripe = Stripe(
     window.location.host === "hotdogwalk.com"
       ? "pk_live_519kwRNDbPsEvuyro3rmyucNffyny87P6c972CRHGdpqrpK8SYrHvtVBAhbHjBzEc4wBKvDvBBKxQkeCv8FOnoZ0B00PWA89gOO"
@@ -60,10 +67,9 @@ export default () => {
             .then((freeResponse) => freeResponse.json())
             .then((freeData) => {
               if (freeData.message !== "success") {
-                let p = document.createElement("p");
-                p.textContent = freeData.message;
                 form.register.disabled = false;
-                return stripeError.appendChild(p);
+
+                return stripeError.appendChild(getError(freeData.message));
               }
 
               window.location = freeData.location;
@@ -80,48 +86,54 @@ export default () => {
               phone: form.tel.value,
             },
           })
-          .then((result: { [index: string]: any }) => {
-            if (result.error) {
-              let p = document.createElement("p");
-              p.textContent = result.error.message;
-              form.register.disabled = false;
-              return stripeError.appendChild(p);
-            }
+          .then(
+            (result: {
+              error: { message: string };
+              paymentMethod: { id: string };
+            }) => {
+              if (result.error) {
+                form.register.disabled = false;
 
-            formData.append("total", validateData.total);
-            formData.append("payment-method", result.paymentMethod.id);
+                return stripeError.appendChild(getError(result.error.message));
+              }
 
-            fetch("/api/process", {
-              method: "post",
-              body: formData,
-            })
-              .then((processResponse) => processResponse.json())
-              .then((processData) => {
-                console.log(processData);
-                if (processData.message !== "success") {
-                  let p = document.createElement("p");
-                  p.textContent = processData.message;
-                  form.register.disabled = false;
-                  return stripeError.appendChild(p);
-                }
+              formData.append("total", validateData.total);
+              formData.append("payment-method", result.paymentMethod.id);
 
-                fetch("/api/save", {
-                  method: "post",
-                  body: formData,
-                })
-                  .then((paidResponse) => paidResponse.json())
-                  .then((paidData) => {
-                    if (paidData.message !== "success") {
-                      let p = document.createElement("p");
-                      p.textContent = paidData.message;
-                      form.register.disabled = false;
-                      return stripeError.appendChild(p);
-                    }
+              fetch("/api/process", {
+                method: "post",
+                body: formData,
+              })
+                .then((processResponse) => processResponse.json())
+                .then((processData) => {
+                  console.log(processData);
+                  if (processData.message !== "success") {
+                    form.register.disabled = false;
 
-                    window.location = paidData.location;
-                  });
-              });
-          });
+                    return stripeError.appendChild(
+                      getError(processData.message),
+                    );
+                  }
+
+                  fetch("/api/save", {
+                    method: "post",
+                    body: formData,
+                  })
+                    .then((paidResponse) => paidResponse.json())
+                    .then((paidData) => {
+                      if (paidData.message !== "success") {
+                        form.register.disabled = false;
+
+                        return stripeError.appendChild(
+                          getError(paidData.message),
+                        );
+                      }
+
+                      window.location = paidData.location;
+                    });
+                });
+            },
+          );
       });
   });
 };
