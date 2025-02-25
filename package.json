@@ -2,6 +2,9 @@
   "name": "hotdogwalk-com",
   "type": "module",
   "version": "0.0.1",
+  "browserslist": [
+    "defaults"
+  ],
   "scripts": {
     "prepublish": "astro build",
     "publish": "wrangler pages deploy",
