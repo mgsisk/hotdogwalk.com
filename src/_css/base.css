@@ -22,7 +22,6 @@ html {
   overflow-wrap: break-word;
   tab-size: var(--tab-size);
   text-size-adjust: 100%;
-  word-break: break-word;
 }
 
 body {
@@ -138,8 +137,8 @@ figure {
 }
 
 figcaption {
-  font-size: var(--font-size--1);
-  line-height: var(--line-height--1);
+  font-size: var(--font-size-m1);
+  line-height: var(--line-height-m1);
 }
 
 a {
@@ -153,8 +152,8 @@ strong {
 }
 
 small {
-  font-size: var(--font-size--1);
-  line-height: var(--line-height--1);
+  font-size: var(--font-size-m1);
+  line-height: var(--line-height-m1);
 }
 
 s {
@@ -186,14 +185,14 @@ kbd {
 
 sub {
   bottom: -0.25em;
-  font-size: var(--font-size--1);
+  font-size: var(--font-size-m1);
   line-height: 0;
   position: relative;
   vertical-align: baseline;
 }
 
 sup {
-  font-size: var(--font-size--1);
+  font-size: var(--font-size-m1);
   line-height: 0;
   position: relative;
   top: -0.5em;
@@ -271,8 +270,8 @@ table {
 }
 
 caption {
-  font-size: var(--font-size--1);
-  line-height: var(--line-height--1);
+  font-size: var(--font-size-m1);
+  line-height: var(--line-height-m1);
 }
 
 tr {
@@ -311,13 +310,13 @@ input {
 }
 
 [type="checkbox"]:checked {
-  background-color: currentColor;
+  background-color: currentcolor;
   background-image: var(--icon-check);
   color: var(--color-accent);
 }
 
 [type="checkbox"]:indeterminate {
-  background-color: currentColor;
+  background-color: currentcolor;
   background-image: var(--icon-dash);
   color: var(--color-accent);
 }
@@ -480,7 +479,7 @@ canvas {
 }
 
 ::-webkit-search-decoration {
-  -webkit-appearance: none;
+  appearance: none;
 }
 
 ::-webkit-date-and-time-value {
