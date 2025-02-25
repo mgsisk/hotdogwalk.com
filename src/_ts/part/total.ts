@@ -27,7 +27,7 @@ const updateTotal = (form: HTMLFormElement): void => {
         total = 0;
       }
 
-      form.querySelector("output")!.textContent = `\$${total.toString()}`;
+      form.querySelector("output")!.textContent = `$${total.toString()}`;
     });
 };
 
@@ -39,15 +39,11 @@ export default () => {
   }
 
   form.ticket.forEach((element: HTMLInputElement): void => {
-    element.addEventListener("change", (_event: Event) => updateTotal(form));
+    element.addEventListener("change", () => updateTotal(form));
   });
 
-  form.merchShirtAdd.addEventListener("click", (_event: Event) =>
-    updateTotal(form),
-  );
-  form.donation.addEventListener("change", (_event: Event) =>
-    updateTotal(form),
-  );
+  form.merchShirtAdd.addEventListener("click", () => updateTotal(form));
+  form.donation.addEventListener("change", () => updateTotal(form));
 
   form.ticket[0].dispatchEvent(new Event("change"));
 };
