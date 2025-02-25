@@ -1,16 +1,16 @@
 export interface Env {
   DB: D1Database;
   open: string;
-  combo: number;
-  event: number;
-  voucher: number;
-  shirt: number;
-  shirts: number;
-  shirtm: number;
-  shirtl: number;
-  shirtx: number;
-  shirtxx: number;
-  shirtxxx: number;
+  combo: string;
+  event: string;
+  voucher: string;
+  shirt: string;
+  shirts: string;
+  shirtm: string;
+  shirtl: string;
+  shirtx: string;
+  shirtxx: string;
+  shirtxxx: string;
 }
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
