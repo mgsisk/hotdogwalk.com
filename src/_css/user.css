@@ -445,6 +445,11 @@ nav ul {
   width: 100%;
 }
 
+.reg-shirts-event hr.split {
+  border-top: silver 0.1em dotted;
+  margin-bottom: calc(var(--vr) * -2);
+}
+
 #stripe-payment {
   border: 0.1rem solid;
   margin: 0 0 var(--vr);
