@@ -1,0 +1,182 @@
+:root {
+  --font-size: max(1em, 1vw * var(--scale-02));
+  --font-stack-mono: "fira mono", monospace;
+  --font-stack:
+    "fira", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  --font-stack-head:
+    "fira extra condensed", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  --icon-check: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="white"><path d="M20 45l20 25 40-45" stroke-width="16"/></svg>');
+  --icon-check-required: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="%23197fe6"><path d="M20 45l20 25 40-45" stroke-width="16"/></svg>');
+  --icon-dash: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="white"><path d="M10 50l80 0" stroke-width="16"/></svg>');
+  --icon-expand: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="black"><path d="M30 40l20-20 20 20" stroke-width="8"/><path d="M30 60l20 20 20-20" stroke-width="8"/></svg>');
+  --line-height: 1.5;
+  --line-span-01: 2;
+  --line-span-02: 2;
+  --line-span-03: 2;
+  --line-span-04: 2;
+  --line-span-05: 3;
+  --scale: 1.2;
+  --tab-size: 2;
+  --width-content: 80ch;
+
+  /* ----- Animations ------------------------------------------------------- */
+  --transition-delay: 0;
+  --transition-duration: 200ms;
+  --transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ----- Colors ----------------------------------------------------------- */
+  --color-accent: #197fe6;
+  --color-accent-50: #197fe699;
+  --color-background: #fff;
+  --color-foreground: #333;
+  --color-shirt-red: firebrick;
+  --color-shirt-orange: chocolate;
+  --color-shirt-purple: darkorchid;
+
+  /* ----- Layout ----------------------------------------------------------- */
+  --max-width: 80rem;
+
+  /* ----- Derived ---------------------------------------------------------- */
+  --font-size-m1: calc(1rem / var(--scale-01));
+  --font-size-00: 1rem;
+  --font-size-01: calc(1rem * var(--scale-01));
+  --font-size-02: calc(1rem * var(--scale-02));
+  --font-size-03: calc(1rem * var(--scale-03));
+  --font-size-04: calc(1rem * var(--scale-04));
+  --font-size-05: calc(1rem * var(--scale-05));
+  --line-height-m1: calc(var(--line-height) / var(--scale-m1));
+  --line-height-00: var(--line-height);
+  --line-height-01: calc(
+    var(--line-height) / var(--scale-01) * var(--line-span-01)
+  );
+  --line-height-02: calc(
+    var(--line-height) / var(--scale-02) * var(--line-span-02)
+  );
+  --line-height-03: calc(
+    var(--line-height) / var(--scale-03) * var(--line-span-03)
+  );
+  --line-height-04: calc(
+    var(--line-height) / var(--scale-04) * var(--line-span-04)
+  );
+  --line-height-05: calc(
+    var(--line-height) / var(--scale-05) * var(--line-span-05)
+  );
+  --scale-m1: calc(1 / var(--scale));
+  --scale-01: var(--scale);
+  --scale-02: calc(var(--scale) * var(--scale-01));
+  --scale-03: calc(var(--scale) * var(--scale-02));
+  --scale-04: calc(var(--scale) * var(--scale-03));
+  --scale-05: calc(var(--scale) * var(--scale-04));
+  --vr: calc(1rem * var(--line-height));
+}
+
+@custom-selector :--button
+  ::file-selector-button,
+  button,
+  [role="button"],
+  [type="button"],
+  [type="reset"],
+  [type="submit"];
+@custom-selector :--enter :focus, :hover;
+@custom-selector :--header h1, h2, h3, h4, h5, h6;
+
+@custom-media --dark (prefers-color-scheme: dark);
+@custom-media --landscape (orientation: landscape);
+@custom-media --less-contrast (prefers-contrast: less);
+@custom-media --less-motion (prefers-reduced-motion);
+@custom-media --lite (prefers-color-scheme: light);
+@custom-media --more-contrast (prefers-contrast: more);
+@custom-media --portrait (orientation: portrait);
+@custom-media --scripts (scripting: enabled);
+@custom-media --touch (hover: none);
+@custom-media --small (width >= 35rem);
+@custom-media --medium (width >= 50rem);
+@custom-media --large (width >= 65rem);
+
+/* ----- Animations --------------------------------------------------------- */
+
+@keyframes bounce {
+  0%,
+  100% {
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    transform: translateY(-25%);
+  }
+
+  50% {
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    transform: none;
+  }
+}
+
+@keyframes ping {
+  75%,
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ----- Fonts -------------------------------------------------------------- */
+
+@font-face {
+  font-family: Fira;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fira-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: Fira;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fira-700.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Fira Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fira-mono-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Fira Extra Condensed";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fira-extra-condensed-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Fira Extra Condensed";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fira-extra-condensed-700.woff2") format("woff2");
+}

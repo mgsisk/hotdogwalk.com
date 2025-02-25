@@ -1,0 +1,223 @@
+---
+import Layout from "@layout/Default.astro"
+---
+<Layout url="/register" title="Register Now" excerpt="Register now for the annual Kalamazoo Hot Dog Walk.">
+  <p>Start by selecting the option that works best for you.</p>
+
+  <form action="" method="post">
+
+    <div class="reg-error"></div>
+
+    <div class="vw-100 reg-type">
+      <div>
+        <input type="radio" id="ticket_combo" name="ticket" value="combo">
+        <label for="ticket_combo">
+          <h2><strong>$88</strong> Combo Meal</h2>
+          <p class="seats"></p>
+          <p>For the hot dog connoisseur – stay hungry with the best the Walk has to offer! This option includes:</p>
+          <ul>
+            <li>A book with vouchers for a dog at each stop on the Walk</li>
+            <li>Transportation to and a dog at each stop during the Walk</li>
+            <li>One commemorative t-shirt</li>
+            <li>A donation to Kalamazoo Loaves & Fishes</li>
+          </ul>
+        </label>
+      </div>
+      <div>
+        <input type="radio" id="ticket_event" name="ticket" value="event">
+        <label for="ticket_event">
+          <h2><strong>$58</strong> Event Only</h2>
+          <p class="seats"></p>
+          <p>Join your 99 closest friends for the 2025 Kalamazoo Hot Dog Walk event! This option includes:</p>
+          <ul>
+            <li>Transportation to and a dog at each stop during the Walk</li>
+            <li>One commemorative t-shirt</li>
+            <li>A donation to Kalamazoo Loaves & Fishes</li>
+          </ul>
+        </label>
+      </div>
+      <div>
+        <input type="radio" id="ticket_voucher" name="ticket" value="voucher" required>
+        <label for="ticket_voucher">
+          <h2><strong>$53</strong> Voucher Only</h2>
+          <p>Enjoy the 2025 Kalamazoo Hot Dog Walk at your own pace! This option includes:</p>
+          <ul>
+            <li>A book with vouchers for a dog at each stop on the Walk</li>
+            <li>One commemorative t-shirt</li>
+            <li>A donation to Kalamazoo Loaves & Fishes</li>
+          </ul>
+        </label>
+      </div>
+      <div>
+        <input type="radio" id="ticket_shirt" name="ticket" value="shirt">
+        <label for="ticket_shirt">
+          <h2><strong>$20</strong> Shirt Only</h2>
+          <p>Just want a t-shirt? We've got you covered. This option includes:</p>
+          <ul>
+            <li>One commemorative t-shirt</li>
+            <li>A donation to Kalamazoo Loaves & Fishes</li>
+          </ul>
+        </label>
+      </div>
+      <div>
+        <h2>Donation Only</h2>
+        <p>Just want to support Kalamazoo Loaves &amp; Fishes? Follow these instructions to let them know we sent you:</p>
+        <ul>
+          <li>Visit <a href="http://klf.convio.net/donate">the Kalamazoo Loaves &amp; Fishes donation page</a></li>
+          <li>Select <strong>Other</strong> for the <strong>In response to</strong> section</li>
+          <li>Enter <strong>Hot Dog Walk</strong> in the <strong>Comments</strong> section near the bottom</li>
+        </ul>
+      </div>
+    </div>
+
+    <fieldset class="reg-info">
+      <legend>Info</legend>
+      <p>
+        <label for="fname">First Name</label>
+        <input type="text" id="fname" name="fname" placeholder="Dog" maxlength="255" required>
+      </p>
+      <p>
+        <label for="lname">Last Name</label>
+        <input type="text" id="lname" name="lname" placeholder="Walker" maxlength="255" required>
+      </p>
+      <p>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="dog.walker@example.com" maxlength="255" required>
+        <span class="email-check"></span>
+      </p>
+      <p>
+        <label for="tel">Phone (with area code)</label>
+        <input type="tel" id="tel" name="tel" placeholder="123-456-7890" maxlength="255" pattern="\(?\d{3}\)?[- ]?\d{3}-?\d{4}" required>
+      </p>
+    </fieldset>
+
+    <fieldset class="reg-dogs">
+      <legend>Dogs</legend>
+      <p>Your registration includes one hot dog at each stop chosen from a selection of the best dogs each partner restaurant has to offer, or you can request a custom dog at any stop during the event if none of the prepared dogs work for you.</p>
+    </fieldset>
+
+    <fieldset class="reg-shirts">
+      <legend>Shirts</legend>
+      <input type="radio" name="shirtb" value="0" required>
+      <p>We're doing something new this year: <strong>four different colors</strong> to choose from!</p>
+      <fieldset class="reg-shirts-event">
+        <legend>For the event</legend>
+        <p>Choose your favorite for the event. Supplies are limited to ensure we get an even mix; you can still order additional shirts in any size and color below.</p>
+        <div>
+          <input type="radio" id="eshirt_red" name="shirtc" value="r">
+          <label for="eshirt_red">Red <span class="count count-red"></span></label>
+        </div>
+        <div>
+          <input type="radio" id="eshirt_orange" name="shirtc" value="o">
+          <label for="eshirt_orange">Orange <span class="count count-orange"></span></label>
+        </div>
+        <div>
+          <input type="radio" id="eshirt_blue" name="shirtc" value="b">
+          <label for="eshirt_blue">Blue <span class="count count-blue"></span></label>
+        </div>
+        <div>
+          <input type="radio" id="eshirt_purple" name="shirtc" value="p">
+          <label for="eshirt_purple">Purple <span class="count count-purple"></span></label>
+        </div>
+        <hr class="split">
+        <div>
+          <input type="radio" id="eshirt_small" name="shirts" value="s">
+          <label for="eshirt_small">Small</label>
+        </div>
+        <div>
+          <input type="radio" id="eshirt_medium" name="shirts" value="m">
+          <label for="eshirt_medium">Medium</label>
+        </div>
+        <div>
+          <input type="radio" id="eshirt_large" name="shirts" value="l">
+          <label for="eshirt_large">Large</label>
+        </div>
+        <div>
+          <input type="radio" id="eshirt_xlarge" name="shirts" value="x">
+          <label for="eshirt_xlarge">X-Large</label>
+        </div>
+        <div>
+          <input type="radio" id="eshirt_xxlarge" name="shirts" value="xx">
+          <label for="eshirt_xxlarge">XX-Large</label>
+        </div>
+        <div>
+          <input type="radio" id="eshirt_xxxlarge" name="shirts" value="xxx">
+          <label for="eshirt_xxxlarge">XXX-Large</label>
+        </div>
+        <hr>
+      </fieldset>
+      <p>Your registration includes one t-shirt of any size. Additional t-shirts are $20 each. </p>
+      <div>
+        <p>
+          <label for="merchShirtSize">Size</label>
+          <select id="merchShirtSize" name="merchShirtSize">
+            <option value="s">Small</option>
+            <option value="m">Medium</option>
+            <option value="l">Large</option>
+            <option value="x">X-Large</option>
+            <option value="xx">XX-Large</option>
+            <option value="xxx">XXX-Large</option>
+          </select>
+        </p>
+        <p>
+          <label for="merchShirtColor">Color</label>
+          <select id="merchShirtColor" name="merchShirtColor">
+            <option value="r">Red</option>
+            <option value="o">Orange</option>
+            <option value="b">Blue</option>
+            <option value="p">Purple</option>
+          </select>
+        </p>
+        <p>
+          <button id="merchShirtAdd" type="button">Add+</button>
+        </p>
+      </div>
+      <table></table>
+    </fieldset>
+    <fieldset>
+      <legend>Donation</legend>
+      <label for="donation">
+        <p>At least $10 of your registration fee will be donated to Kalamazoo Loaves &amp; Fishes. If you'd like to donate more, please indicate that here.</p>
+      </label>
+      <p>
+        $<input type="number" id="donation" name="donation" min="0" max="9999" step="5" value="0">
+      </p>
+    </fieldset>
+    <fieldset class="reg-waivers">
+      <legend>Waivers</legend>
+      <p>We have a few important details you need to read, understand, and agree to before you complete your registration.</p>
+      <p>
+        <input type="checkbox" id="waiver1" required>
+        <label for="waiver1">I understand that the Kalamazoo Hot Dog Walk is for registered guests only. I understand that – because we're travelling together on a bus – I'll need to be available for the entire afternoon and may not join the event in progress or leave early. I plan to participate in the entire Walk, and I agree to not bring anyone with me who isn't also registered.</label>
+      </p>
+      <p>
+        <input type="checkbox" id="waiver2" required>
+        <label for="waiver2">I understand that t-shirt and hot dog orders are being placed based on each specific registration, making this transaction non-refundable. I understand that – if I cannot attend the event – I am welcome to pick up my t-shirt at a later time, but agree to the Kalamazoo Hot Dog Walk's no refund policy.</label>
+      </p>
+      <p>
+        <input type="checkbox" id="waiver3">
+        <label for="waiver3">I understand that my participation or involvement in the Kalamazoo Hot Dog Walk carries with it the potential for certain risks – some of which may not be reasonably foreseeable – and I agree to release, indemnify, and hold harmless the Kalamazoo Hot Dog Walk, as well as all their representatives, successors, etc. from any and all losses, claims, theft, demands, liabilities, causes of action, or expenses, known or unknown, arising out of my participation in the Kalamazoo Hot Dog Walk.</label>
+      </p>
+    </fieldset>
+    <fieldset>
+      <legend class="total">Total – <output></output></legend>
+      <p>Payments are securely processed via <a href="https://stripe.com/" target="_blank">Stripe</a>.</p>
+      <div class="stripe-error"></div>
+      <div id="stripe-payment"></div>
+    </fieldset>
+    <p>
+      <button type="submit" name="register">Register for the 2025 Kalamazoo Hot Dog Walk</button>
+    </p>
+  </form>
+  <template id="merch-shirt-row">
+    <tr>
+      <th>
+        <button type="button"> — </button>
+        <input type="hidden" value="1">
+      </th>
+      <td>[size] [color]</td>
+      <td>1</td>
+    </tr>
+  </template>
+  <script is:inline src="https://js.stripe.com/v3/"></script>
+</Layout>
