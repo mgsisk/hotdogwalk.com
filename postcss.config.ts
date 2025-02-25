@@ -1,0 +1,7 @@
+export default {
+  plugins: {
+    "postcss-import": {},
+    "postcss-preset-env": { stage: 0 },
+    cssnano: { preset: "cssnano-preset-advanced" },
+  },
+};
