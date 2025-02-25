@@ -7,6 +7,10 @@ import payment from "./part/payment.js";
 import total from "./part/total.js";
 
 const go = () => {
+  if (document.readyState === "loading") {
+    return document.addEventListener("DOMContentLoaded", go);
+  }
+
   cta();
   hero();
   payment();
@@ -16,6 +20,4 @@ const go = () => {
   total();
 };
 
-document.readyState === "loading"
-  ? document.addEventListener("DOMContentLoaded", go)
-  : go();
+go();
