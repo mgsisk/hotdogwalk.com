@@ -14,7 +14,7 @@ to a safe, voucher format which served the mission successfully, therefore this
 year we will once again have multiple options available for participants:
 
 - The **live event** is back again, which involves participants riding buses
-  to **seven** restaurants in one afternoon on May 23 starting at 1pm: Coney
+  to **six** restaurants in one afternoon on May 23 starting at 1pm: Coney
   Island, Nagle’s Top Dog & Malt Shoppe, Papa’s Italian Sausage, Ray Ray’s
   Italian Beef & Sausage, The Root Beer Stand, and Schultz’s Treat Street.
 - Second, retaining the voucher option, registrants receive a packet containing
