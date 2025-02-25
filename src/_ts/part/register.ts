@@ -46,7 +46,7 @@ const addShirtDog = (form: HTMLFormElement): void => {
   const row = table!.querySelector(`tr.shirt${size}-${color}`);
 
   if (row) {
-    let count = row.querySelector("input")!.value;
+    const count = row.querySelector("input")!.value;
 
     row.querySelector("td:last-child")!.textContent = (
       parseInt(count) + 1
@@ -92,7 +92,7 @@ const subShirtDog = (element: HTMLTableRowElement): void => {
   const countInput: HTMLInputElement = element.querySelector("input")!;
   const table: HTMLTableElement = element.closest("table")!;
 
-  let count: number = parseInt(countInput.value);
+  const count = parseInt(countInput.value);
 
   if (count === 1) {
     element.remove();
@@ -161,7 +161,7 @@ export default () => {
   }
 
   form.ticket.forEach((element: HTMLSelectElement): void =>
-    element.addEventListener("change", (event: Event): void => {
+    element.addEventListener("change", (): void => {
       toggleDog(form.ticket.value, form);
       checkShirtDog(form);
     }),
@@ -180,20 +180,14 @@ export default () => {
   );
 
   form.shirts.forEach((element: HTMLSelectElement): void =>
-    element.addEventListener("change", (event: Event): void =>
-      checkShirtDog(form),
-    ),
+    element.addEventListener("change", (): void => checkShirtDog(form)),
   );
 
   form.shirtc.forEach((element: HTMLSelectElement): void =>
-    element.addEventListener("change", (event: Event): void =>
-      checkShirtDog(form),
-    ),
+    element.addEventListener("change", (): void => checkShirtDog(form)),
   );
 
-  form.merchShirtAdd.addEventListener("click", (event: Event): void =>
-    addShirtDog(form),
-  );
+  form.merchShirtAdd.addEventListener("click", (): void => addShirtDog(form));
 
   form.ticket[0].dispatchEvent(new Event("change"));
 };
