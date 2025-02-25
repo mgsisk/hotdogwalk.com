@@ -1,29 +1,29 @@
 export interface Env {
-  combo: number;
-  event: number;
-  voucher: number;
-  shirt: number;
-  shirts: number;
-  shirtm: number;
-  shirtl: number;
-  shirtx: number;
-  shirtxx: number;
-  shirtxxx: number;
+  combo: string;
+  event: string;
+  voucher: string;
+  shirt: string;
+  shirts: string;
+  shirtm: string;
+  shirtl: string;
+  shirtx: string;
+  shirtxx: string;
+  shirtxxx: string;
 }
 
 export const onRequestGet: PagesFunction<Env> = async (context) =>
   new Response(
     JSON.stringify({
-      combo: context.env.combo,
-      event: context.env.event,
-      voucher: context.env.voucher,
-      shirt: context.env.shirt,
-      shirts: context.env.shirts,
-      shirtm: context.env.shirtm,
-      shirtl: context.env.shirtl,
-      shirtx: context.env.shirtx,
-      shirtxx: context.env.shirtxx,
-      shirtxxx: context.env.shirtxxx,
+      combo: parseInt(context.env.combo),
+      event: parseInt(context.env.event),
+      voucher: parseInt(context.env.voucher),
+      shirt: parseInt(context.env.shirt),
+      shirts: parseInt(context.env.shirts),
+      shirtm: parseInt(context.env.shirtm),
+      shirtl: parseInt(context.env.shirtl),
+      shirtx: parseInt(context.env.shirtx),
+      shirtxx: parseInt(context.env.shirtxx),
+      shirtxxx: parseInt(context.env.shirtxxx),
     }),
     { headers: { "Content-Type": "application/json" } },
   );
