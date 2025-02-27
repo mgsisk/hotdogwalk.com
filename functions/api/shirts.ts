@@ -12,7 +12,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
   let blue = seats / 4;
   let purple = seats / 4;
 
-  const shirts: Record<string, number> = await context.env.DB.prepare(
+  const shirts: Record<string, number> | null = await context.env.DB.prepare(
     `select
       count(case when shirtc = "r" then 1 end) as redTotal,
       count(case when shirtc = "r" and created <= ?1 then 1 end) as redPre,
@@ -27,45 +27,47 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
     .bind(context.env.open.split("T").shift())
     .first();
 
-  if (shirts.redTotal && shirts.redPre) {
-    const difRedShirt = shirts.redTotal - shirts.redPre;
+  if (shirts) {
+    if (shirts.redPre) {
+      const difRedShirt = shirts.redTotal - shirts.redPre;
 
-    if (difRedShirt < shirts.redPre) {
-      red += shirts.redPre - difRedShirt;
+      if (difRedShirt < shirts.redPre) {
+        red += shirts.redPre - difRedShirt;
+      }
     }
-  }
 
-  red -= shirts.redTotal;
+    red -= shirts.redTotal;
 
-  if (shirts.orangeTotal && shirts.orangePre) {
-    const difOrangeShirt = shirts.orangeTotal - shirts.orangePre;
+    if (shirts.orangePre) {
+      const difOrangeShirt = shirts.orangeTotal - shirts.orangePre;
 
-    if (difOrangeShirt < shirts.orangePre) {
-      orange += shirts.orangePre - difOrangeShirt;
+      if (difOrangeShirt < shirts.orangePre) {
+        orange += shirts.orangePre - difOrangeShirt;
+      }
     }
-  }
 
-  orange -= shirts.orangeTotal;
+    orange -= shirts.orangeTotal;
 
-  if (shirts.blueTotal && shirts.bluePre) {
-    const difBlueShirt = shirts.blueTotal - shirts.bluePre;
+    if (shirts.bluePre) {
+      const difBlueShirt = shirts.blueTotal - shirts.bluePre;
 
-    if (difBlueShirt < shirts.bluePre) {
-      blue += shirts.bluePre - difBlueShirt;
+      if (difBlueShirt < shirts.bluePre) {
+        blue += shirts.bluePre - difBlueShirt;
+      }
     }
-  }
 
-  blue -= shirts.blueTotal;
+    blue -= shirts.blueTotal;
 
-  if (shirts.purpleTotal && shirts.purplePre) {
-    const difPurpleShirt = shirts.purpleTotal - shirts.purplePre;
+    if (shirts.purplePre) {
+      const difPurpleShirt = shirts.purpleTotal - shirts.purplePre;
 
-    if (difPurpleShirt < shirts.purplePre) {
-      purple += shirts.purplePre - difPurpleShirt;
+      if (difPurpleShirt < shirts.purplePre) {
+        purple += shirts.purplePre - difPurpleShirt;
+      }
     }
-  }
 
-  purple -= shirts.purpleTotal;
+    purple -= shirts.purpleTotal;
+  }
 
   return new Response(
     JSON.stringify({
