@@ -1,4 +1,7 @@
-const go = (shirts: { [index: string]: number }): number | void => {
+type Color = "r" | "o" | "b" | "p";
+type Shirts = { r: number; o: number; b: number; p: number };
+
+const go = (shirts: Shirts) => {
   const output: NodeListOf<HTMLElement> | null = document.querySelectorAll(
     ".reg-shirts-event .count",
   );
@@ -11,12 +14,12 @@ const go = (shirts: { [index: string]: number }): number | void => {
   const form: HTMLFormElement = document.querySelector("form")!;
 
   output.forEach((element: HTMLElement): void => {
-    const color: string = element.classList.value
+    const color = element.classList.value
       .split(" ")
       .pop()!
       .replace("count-", "");
 
-    if (shirts[color] <= 0 && !form.free2025 && !form.vip2025) {
+    if (shirts[color as Color] <= 0 && !form.free2025 && !form.vip2025) {
       element.textContent = "Sold Out";
       element.closest("div")!.querySelector("input")!.checked = false;
       element.closest("div")!.querySelector("input")!.disabled = true;
@@ -25,7 +28,7 @@ const go = (shirts: { [index: string]: number }): number | void => {
     }
 
     keepCounting = true;
-    element.textContent = `${shirts[color]} Remaining`;
+    element.textContent = `${shirts[color as Color]} Remaining`;
   });
 
   if (!keepCounting) {
@@ -36,7 +39,7 @@ const go = (shirts: { [index: string]: number }): number | void => {
     () =>
       fetch("/api/shirts")
         .then((response) => response.json())
-        .then((data) => go(data)),
+        .then((data) => go(data as Shirts)),
     5000,
   );
 };
@@ -44,4 +47,4 @@ const go = (shirts: { [index: string]: number }): number | void => {
 export default () =>
   fetch("/api/shirts")
     .then((response) => response.json())
-    .then((data) => go(data));
+    .then((data) => go(data as Shirts));
