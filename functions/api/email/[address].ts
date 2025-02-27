@@ -3,9 +3,7 @@ export interface Env {
   open: string;
 }
 
-export const onRequestGet: PagesFunction<Env> = async (
-  context,
-): Promise<Response> => {
+export const onRequestGet: PagesFunction<Env> = async (context) => {
   const year = context.env.open.split("-").shift();
   const row = await context.env.DB.prepare(
     `select created from walk${year} where email = ?`,
