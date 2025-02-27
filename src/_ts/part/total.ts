@@ -1,4 +1,4 @@
-const updateTotal = (form: HTMLFormElement): void => {
+const updateTotal = (form: HTMLFormElement) =>
   fetch("/api/fees")
     .then((response): Promise<{ [index: string]: string }> => response.json())
     .then((fees: { [index: string]: string }): void => {
@@ -29,7 +29,6 @@ const updateTotal = (form: HTMLFormElement): void => {
 
       form.querySelector("output")!.textContent = `$${total.toString()}`;
     });
-};
 
 export default () => {
   const form: HTMLFormElement | null = document.querySelector("form");
