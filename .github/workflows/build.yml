@@ -1,0 +1,46 @@
+name: build
+
+on: push
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - run: npm clean-install
+      - uses: codacy/codacy-analysis-cli-action@master
+        with:
+          format: sarif
+          gh-code-scanning-compat: true
+          max-allowed-issues: 2147483647
+          output: results.sarif
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          verbose: true
+      - uses: github/codeql-action/upload-sarif@main
+        with:
+          sarif_file: results.sarif
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - run: npm clean-install
+      - run: npm test
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - run: npm clean-install
+      - run: npm run make
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          command: pages deploy dist --project-name=hotdogwalk-com
