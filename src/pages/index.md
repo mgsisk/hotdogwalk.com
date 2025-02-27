@@ -6,7 +6,7 @@ excerpt: |
 hero: true
 ---
 
-![Hot dog walkers](/srv/walkers.webp)
+![Hot dog walkers](../_img/walkers.webp)
 
 2025 marks the fifteenth annual Kalamazoo Hot Dog Walk, an event supporting
 local businesses and [Kalamazoo Loaves & Fishes][]. The pandemic caused a pivot
@@ -54,7 +54,7 @@ Great! You can make an additional donation to [Kalamazoo Loaves & Fishes][] when
 you register and we’ll have a collection box on the day of the event for further
 contributions.
 
-![More walkers](/srv/klf.webp)
+![More walkers](../_img/klf.webp)
 
 ## Event Tips
 
