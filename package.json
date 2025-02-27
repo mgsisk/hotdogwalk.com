@@ -6,7 +6,7 @@
     "defaults"
   ],
   "scripts": {
-    "prepublish": "npm run make",
+    "prepublishOnly": "npm run make",
     "publish": "wrangler pages deploy",
     "dev": "wrangler types; wrangler pages dev --live-reload",
     "make": "astro build",
