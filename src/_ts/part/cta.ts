@@ -139,9 +139,9 @@ export default (): void => {
     .then((response) => response.json())
     .then((data) =>
       go([
-        Date.parse(data.open),
-        Date.parse(data.close),
-        Date.parse(data.event),
+        Date.parse((data as { open: string }).open),
+        Date.parse((data as { close: string }).close),
+        Date.parse((data as { event: string }).event),
       ]),
     );
 };
