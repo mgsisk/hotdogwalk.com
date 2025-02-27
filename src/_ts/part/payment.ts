@@ -1,3 +1,13 @@
+type Validation = {
+  error: number;
+  total: number;
+};
+
+type Completion = {
+  location: string;
+  message: string;
+};
+
 const getError = (message: string): HTMLParagraphElement => {
   const p = document.createElement("p");
   p.textContent = message;
@@ -49,14 +59,14 @@ export default () => {
     })
       .then((validateResponse) => validateResponse.json())
       .then((validateData) => {
-        if (validateData.error > 0 || !form.checkValidity()) {
+        if ((validateData as Validation).error > 0 || !form.checkValidity()) {
           form.register.disabled = false;
           form.reportValidity();
 
           return;
         }
 
-        if (!validateData.total) {
+        if (!(validateData as Validation).total) {
           formData.append("total", "0");
           formData.append("payment-method", "comp");
 
@@ -66,13 +76,15 @@ export default () => {
           })
             .then((freeResponse) => freeResponse.json())
             .then((freeData) => {
-              if (freeData.message !== "success") {
+              if ((freeData as Completion).message !== "success") {
                 form.register.disabled = false;
 
-                return stripeError.appendChild(getError(freeData.message));
+                return stripeError.appendChild(
+                  getError((freeData as Completion).message),
+                );
               }
 
-              window.location = freeData.location;
+              window.location.href = (freeData as Completion).location;
             });
         }
 
@@ -97,7 +109,10 @@ export default () => {
                 return stripeError.appendChild(getError(result.error.message));
               }
 
-              formData.append("total", validateData.total);
+              formData.append(
+                "total",
+                (validateData as Validation).total.toString(),
+              );
               formData.append("payment-method", result.paymentMethod.id);
 
               fetch("/api/process", {
@@ -107,11 +122,11 @@ export default () => {
                 .then((processResponse) => processResponse.json())
                 .then((processData) => {
                   console.log(processData);
-                  if (processData.message !== "success") {
+                  if ((processData as Completion).message !== "success") {
                     form.register.disabled = false;
 
                     return stripeError.appendChild(
-                      getError(processData.message),
+                      getError((processData as Completion).message),
                     );
                   }
 
@@ -121,15 +136,15 @@ export default () => {
                   })
                     .then((paidResponse) => paidResponse.json())
                     .then((paidData) => {
-                      if (paidData.message !== "success") {
+                      if ((paidData as Completion).message !== "success") {
                         form.register.disabled = false;
 
                         return stripeError.appendChild(
-                          getError(paidData.message),
+                          getError((paidData as Completion).message),
                         );
                       }
 
-                      window.location = paidData.location;
+                      window.location.href = (paidData as Completion).location;
                     });
                 });
             },
