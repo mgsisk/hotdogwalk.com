@@ -1,13 +1,13 @@
 {
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist", "src/scripts"],
+  "exclude": ["dist"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@layout/*": ["src/layout/*"],
-      "@parts/*": ["src/parts/*"],
-      "@partner/*": ["src/parts/partner/*"]
+      "@layout/*": ["src/_layout/*"],
+      "@parts/*": ["src/_parts/*"],
+      "@partner/*": ["src/_parts/partner/*"]
     },
     "types": ["@cloudflare/workers-types"]
   }
