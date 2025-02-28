@@ -13,6 +13,13 @@ export interface Env {
   shirtxxx: string;
 }
 
+type Error = {
+  message: string;
+};
+
+type Ticket = "combo" | "event" | "voucher" | "shirt";
+type Size = "s" | "m" | "l" | "x" | "xx" | "xxx";
+
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   const formData = await context.request.formData();
   const output = {
@@ -27,17 +34,17 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   let shirtc = formData.get("shirtc");
 
   if (
-    parseInt(formData.get("total")) > 0 &&
+    parseInt(formData.get("total") as string) > 0 &&
     formData.get("payment-method") === "comp"
   ) {
     output.message = "Processing error, please try again.";
   } else {
     if (formData.get("payment-method") === "comp") {
+      const compStr = `${formData.get("fname")}${formData.get("lname")}${now.toTimeString()}`;
       let hash = 0;
-      let compStr = `${formData.get("fname")}${formData.get("lname")}${now.toTimeString()}`;
 
       for (let i = 0, len = compStr.length; i < len; i++) {
-        let chr = compStr.charCodeAt(i);
+        const chr = compStr.charCodeAt(i);
 
         hash = (hash << 5) - hash + chr;
         hash |= 0;
@@ -54,7 +61,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       access = "comp";
     }
 
-    if (["voucher", "shirt"].indexOf(formData.get("ticket")) > -1) {
+    if (["voucher", "shirt"].indexOf(formData.get("ticket") as string) > -1) {
       shirts = "";
       shirtc = "";
     }
@@ -71,10 +78,10 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
           formData.get("fname"),
           formData.get("lname"),
           formData.get("email"),
-          formData.get("tel").replace(/\D+/g, ""),
+          (formData.get("tel") as string).replace(/\D+/g, ""),
           shirts,
           shirtc,
-          parseInt(context.env[formData.get("ticket")]),
+          parseInt(context.env[formData.get("ticket") as Ticket]),
           formData.get("donation"),
           formData.get("total"),
           formData.get("payment-method"),
@@ -85,15 +92,16 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         let merchQuery = `insert into merch${year} (walker, type, size, color, price, quantity, total) values`;
 
         for (const field of formData.entries()) {
-          if (!field[0].match(/^shirt(s|m|l|x|xx|xxx)\-(r|o|b|p)$/)) {
+          if (!field[0].match(/^shirt(s|m|l|x|xx|xxx)-(r|o|b|p)$/)) {
             continue;
           }
 
           const [size, color] = field[0].replace(/^shirt/, "").split("-");
-          const shirtFee = parseInt(context.env[`shirt${size}`]);
-          const shirtTotal = shirtFee * parseInt(field[1]);
+          const shirtFee = parseInt(context.env[`shirt${size as Size}`]);
+          const shirtCount = field[1] as string;
+          const shirtTotal = shirtFee * parseInt(shirtCount);
 
-          merchQuery += `, (${insert.meta.last_row_id}, 'shirt', '${size}', '${color}', ${shirtFee}, ${parseInt(field[1])}, ${shirtTotal})`;
+          merchQuery += `, (${insert.meta.last_row_id}, 'shirt', '${size}', '${color}', ${shirtFee}, ${parseInt(shirtCount)}, ${shirtTotal})`;
         }
 
         if (merchQuery.indexOf("values,") === -1) {
@@ -110,8 +118,8 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
           }
         }
       }
-    } catch (e: any) {
-      output.message = e.message;
+    } catch (e) {
+      output.message = (e as Error).message;
     }
   }
 

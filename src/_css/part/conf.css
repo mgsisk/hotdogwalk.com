@@ -146,7 +146,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("fira-400.woff2") format("woff2");
+  src: url("/srv/fira-400.woff2") format("woff2");
 }
 
 @font-face {
@@ -154,7 +154,7 @@
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url("fira-700.woff2") format("woff2");
+  src: url("/srv/fira-700.woff2") format("woff2");
 }
 
 @font-face {
@@ -162,7 +162,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("fira-mono-400.woff2") format("woff2");
+  src: url("/srv/fira-mono-400.woff2") format("woff2");
 }
 
 @font-face {
@@ -170,7 +170,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("fira-extra-condensed-400.woff2") format("woff2");
+  src: url("/srv/fira-extra-condensed-400.woff2") format("woff2");
 }
 
 @font-face {
@@ -178,5 +178,5 @@
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url("fira-extra-condensed-700.woff2") format("woff2");
+  src: url("/srv/fira-extra-condensed-700.woff2") format("woff2");
 }

@@ -16,7 +16,7 @@ const go = (seats: number): number | void => {
       () =>
         fetch("/api/seats")
           .then((response) => response.json())
-          .then((data) => go(parseInt(data.seats))),
+          .then((data) => go((data as { seats: number }).seats)),
       5000,
     );
   }
@@ -48,4 +48,4 @@ const go = (seats: number): number | void => {
 export default () =>
   fetch("/api/seats")
     .then((response) => response.json())
-    .then((data) => go(parseInt(data.seats)));
+    .then((data) => go((data as { seats: number }).seats));

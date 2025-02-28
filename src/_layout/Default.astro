@@ -1,4 +1,5 @@
 ---
+import '../_css/style.css'
 import Header from "@parts/header.astro"
 import Partners from "@parts/partners.astro"
 
@@ -22,7 +23,7 @@ const canonicalUrl = `https://hotdogwalk.com${url}`
     {title !== "Home" ? <title>{title} • Kalamazoo Hot Dog Walk</title> : <title>Kalamazoo Hot Dog Walk</title>}
     <link rel="canonical" href={canonicalUrl}>
     <link rel="icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/srv/style.css">
+    <link rel="sitemap" href="/sitemap-index.xml">
     {url === "/register" ? <script is:inline>
       fetch("/api/dates")
         .then((response) => response.json())
@@ -61,7 +62,8 @@ const canonicalUrl = `https://hotdogwalk.com${url}`
     <footer>
       <p>© 2025 Kalamazoo Hot Dog Walk • <a href="/privacy">Privacy Policy</a></p>
     </footer>
-    <script is:inline type="module" src="/srv/script.js"></script>
+    <!-- <script is:inline type="module" src="/srv/script.js"></script> -->
+     <script src="../_ts/script.ts"></script>
     {url === "/success" ? <script is:inline>location.search.match(/^\?id=\d+$/)?fetch(`/api/success/${location.search.replace(/\D+/g,"")}`):0</script> : null}
   </body>
 </html>

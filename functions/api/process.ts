@@ -6,6 +6,10 @@ export interface Env {
   stripe_secret: string;
 }
 
+type Error = {
+  message: string;
+};
+
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   const formData = await context.request.formData();
   const stripe = new Stripe(context.env.stripe_secret);
@@ -16,7 +20,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
   try {
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: parseInt(formData.get("total")) * 100,
+      amount: parseInt(formData.get("total") as string) * 100,
       automatic_payment_methods: {
         enabled: true,
         allow_redirects: "never",
@@ -24,14 +28,14 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       confirm: true,
       currency: "usd",
       description: `HDW ${year} - ${formData.get("fname")} ${formData.get("lname")}`,
-      payment_method: formData.get("payment-method"),
+      payment_method: formData.get("payment-method") as string,
     });
 
     if (paymentIntent.status === "succeeded") {
       output.message = "success";
     }
-  } catch (e: any) {
-    output.message = e.message;
+  } catch (e) {
+    output.message = (e as Error).message;
   }
 
   return new Response(JSON.stringify(output), {

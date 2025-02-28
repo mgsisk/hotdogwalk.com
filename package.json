@@ -6,41 +6,30 @@
     "defaults"
   ],
   "scripts": {
-    "prepublish": "astro build",
+    "prepublishOnly": "npm run make",
     "publish": "wrangler pages deploy",
-    "dev": "astro build && wrangler pages dev --live-reload",
-    "lint.css": "stylelint --fix src/_css/**/*.css",
-    "lint.ts": "eslint --fix src/_ts/**/*.ts",
-    "make.css": "postcss src/_css/style.css -o public/srv/style.css",
-    "make.ts": "tsup src/_ts/script.ts --out-dir public/srv --format esm --minify terser",
-    "make.types": "wrangler types",
+    "dev": "wrangler types; wrangler pages dev --live-reload",
     "make": "astro build",
-    "watch.css": "chokidar 'src/_css/**/*.css' -c 'npm run make.css'",
-    "watch.ts": "chokidar 'src/_ts/**/*.ts' -c 'npm run make.ts'",
-    "watch.types": "chokidar 'wrangler.toml' -c 'npm run make.types'",
-    "watch": "chokidar 'functions/**/*' 'public/**/*' 'src/**/*' -c 'npm run make'"
+    "test": "stylelint --fix src/_css; eslint --fix src/_ts functions; tsc --noEmit",
+    "watch": "chokidar 'public/**/*' 'src/**/*' -c 'npm run make'"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.1.0",
-    "astro": "^5.1.4"
+    "@astrojs/sitemap": "^3.2.1",
+    "astro": "^5.1.4",
+    "resend": "^4.1.2",
+    "stripe": "^17.7.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250109.0",
     "@eslint/js": "^9.21.0",
-    "@tsconfig/recommended": "^1.0.8",
     "chokidar-cli": "^3.0.0",
     "cssnano": "^7.0.6",
     "cssnano-preset-advanced": "^7.0.6",
-    "postcss-cli": "^11.0.0",
-    "postcss-import": "^16.1.0",
     "postcss-preset-env": "^10.1.3",
     "prettier": "^3.4.2",
-    "resend": "^4.1.2",
-    "stripe": "^17.6.0",
     "stylelint": "^16.14.1",
     "stylelint-config-standard": "^37.0.0",
-    "terser": "^5.39.0",
-    "tsup": "^8.3.6",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.25.0",
     "wrangler": "^3.100.0"

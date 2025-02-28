@@ -30,9 +30,9 @@ const emailDog = (address: string): void => {
   fetch(`/api/email/${address}`)
     .then((response) => response.json())
     .then((data) =>
-      data.date
+      (data as { date: string }).date
         ? alertDog(
-            `It looks like you already registered on ${new Date(data.date).toLocaleDateString("en-US")}. You should only continue if you're registering another person using the same email address.`,
+            `It looks like you already registered on ${new Date((data as { date: string }).date).toLocaleDateString("en-US")}. You should only continue if you're registering another person using the same email address.`,
           )
         : null,
     );

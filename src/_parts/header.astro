@@ -11,7 +11,8 @@ const headerClass = hero ? 'vw-100 hero' : 'vw-100';
 ---
 
 <header class={headerClass}>
+  {hero ? <a href="/sponsors">Become a Sponsor</a> : null}
   <a href="/" class="logo"><Logo/></a>
-  <video src="/srv/hero.mp4" poster="/srv/hero.jpg" autoplay loop muted playsinline></video>
+  <video src="/srv/hero.mp4" poster="/srv/hero.webp" autoplay loop muted playsinline></video>
   {hero ? <div class="cta"></div><a href="#main">Learn More</a> : null}
 </header>
