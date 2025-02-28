@@ -14,7 +14,7 @@
     "watch": "chokidar 'public/**/*' 'src/**/*' -c 'npm run make'"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^12.1.0",
+    "@astrojs/cloudflare": "^12.2.3",
     "@astrojs/sitemap": "^3.2.1",
     "astro": "^5.1.4",
     "resend": "^4.1.2",
