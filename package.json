@@ -1,7 +1,7 @@
 {
   "name": "hotdogwalk-com",
+  "version": "1.0.0",
   "type": "module",
-  "version": "0.0.1",
   "browserslist": [
     "defaults"
   ],
@@ -10,11 +10,12 @@
     "publish": "wrangler pages deploy",
     "dev": "wrangler types; wrangler pages dev --live-reload",
     "make": "astro build",
-    "test": "stylelint --fix src/_css; eslint --fix src/_ts functions; tsc --noEmit",
+    "test": "stylelint --fix src/styles; eslint --fix src/scripts functions; tsc --noEmit",
     "watch": "chokidar 'public/**/*' 'src/**/*' -c 'npm run make'"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.1.0",
+    "@astrojs/mdx": "^4.1.0",
     "@astrojs/sitemap": "^3.2.1",
     "astro": "^5.1.4",
     "resend": "^4.1.2",
