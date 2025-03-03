@@ -1,10 +1,14 @@
 import { defineConfig } from "astro/config";
-
 import sitemap from "@astrojs/sitemap";
+import mdx from "@astrojs/mdx";
 
 export default defineConfig({
   site: "https://hotdogwalk.com",
   build: { assets: "srv" },
-  experimental: { svg: true },
-  integrations: [sitemap({ filter: (page) => !page.match(/\/success\//) })],
+  experimental: { responsiveImages: true, svg: true },
+  image: { experimentalLayout: "responsive" },
+  integrations: [
+    mdx(),
+    sitemap({ filter: (page) => !page.match(/\/success\//) }),
+  ],
 });
