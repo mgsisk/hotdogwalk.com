@@ -3,10 +3,9 @@ layout: "@layout/Default.astro"
 title: Home
 excerpt: |
   The annual Kalamazoo Hot Dog Walk celebrates our great city, the delicious frankfurters found within its borders, and supports the important work at Kalamazoo Loaves & Fishes.
-hero: true
 ---
 
-![Hot dog walkers](../_img/walkers.webp)
+![Hot dog walkers](../images/walkers.webp)
 
 2025 marks the fifteenth annual Kalamazoo Hot Dog Walk, an event supporting
 local businesses and [Kalamazoo Loaves & Fishes][]. The pandemic caused a pivot
@@ -54,7 +53,7 @@ Great! You can make an additional donation to [Kalamazoo Loaves & Fishes][] when
 you register and we’ll have a collection box on the day of the event for further
 contributions.
 
-![More walkers](../_img/klf.webp)
+![More walkers](../images/klf.webp)
 
 ## Event Tips
 
