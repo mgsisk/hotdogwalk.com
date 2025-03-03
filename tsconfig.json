@@ -5,9 +5,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@layout/*": ["src/_layout/*"],
-      "@parts/*": ["src/_parts/*"],
-      "@partner/*": ["src/_parts/partner/*"]
+      "@collection/*": ["src/collections/*"],
+      "@component/*": ["src/components/*"],
+      "@image/*": ["src/images/*"],
+      "@layout/*": ["src/layouts/*"],
+      "@partner/*": ["src/components/partner/*"],
+      "@style/*": ["src/styles/*"]
     },
     "types": ["@cloudflare/workers-types"]
   }
