@@ -1,7 +1,7 @@
 ---
 import Layout from "@layout/Default.astro"
 ---
-<Layout url="/register" title="Register Now" excerpt="Register now for the annual Kalamazoo Hot Dog Walk.">
+<Layout title="Register Now" excerpt="Register now for the annual Kalamazoo Hot Dog Walk.">
   <p>Start by selecting the option that works best for you.</p>
 
   <form action="" method="post">
@@ -151,6 +151,7 @@ import Layout from "@layout/Default.astro"
         <p>
           <label for="merchShirtSize">Size</label>
           <select id="merchShirtSize" name="merchShirtSize">
+            <option value="">Select a size</option>
             <option value="s">Small</option>
             <option value="m">Medium</option>
             <option value="l">Large</option>
@@ -162,6 +163,7 @@ import Layout from "@layout/Default.astro"
         <p>
           <label for="merchShirtColor">Color</label>
           <select id="merchShirtColor" name="merchShirtColor">
+            <option value="">Select a color</option>
             <option value="r">Red</option>
             <option value="o">Orange</option>
             <option value="b">Blue</option>
