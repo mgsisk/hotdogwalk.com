@@ -1,3 +1,1 @@
-export default {
-  extends: "stylelint-config-standard",
-};
+export default { extends: "stylelint-config-standard" };

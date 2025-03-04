@@ -43,6 +43,10 @@ const addShirtDog = (form: HTMLFormElement): void => {
   const color: string = form.merchShirtColor.value;
   const table: HTMLTableElement = form.querySelector(".reg-shirts table")!;
 
+  if (!size || !color) {
+    return;
+  }
+
   const row = table!.querySelector(`tr.shirt${size}-${color}`);
 
   if (row) {

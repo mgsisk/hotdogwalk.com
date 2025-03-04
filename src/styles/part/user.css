@@ -304,6 +304,8 @@ nav ul {
 }
 
 .reg-shirts-event label {
+  margin: 0 0 calc(var(--vr) * 0.5);
+  padding: var(--vr);
   text-align: center;
   width: 100%;
 }
@@ -447,7 +449,6 @@ nav ul {
 
 .reg-shirts-event hr.split {
   border-top: silver 0.1em dotted;
-  margin-bottom: calc(var(--vr) * -2);
 }
 
 #stripe-payment {
@@ -490,23 +491,6 @@ nav ul {
   line-height: var(--line-height-03);
 }
 
-@media (--small) {
-  .reg-info,
-  .reg-shirts-event,
-  .reg-shirts div {
-    flex-flow: row wrap;
-    gap: var(--vr);
-    margin: 0 0 var(--vr);
-  }
-
-  .reg-info p,
-  .reg-shirts div p,
-  .reg-shirts-event div {
-    flex: 0 1 calc(50% - var(--vr) / 2);
-    margin: 0;
-  }
-}
-
 .event-shirt :checked + [for$="red"] {
   background: var(--color-shirt-red);
   color: var(--color-background);
@@ -525,6 +509,32 @@ nav ul {
 .event-shirt :checked + [for$="purple"] {
   background: var(--color-shirt-purple);
   color: var(--color-background);
+}
+
+@media (--small) {
+  .reg-info,
+  .reg-shirts-event,
+  .reg-shirts div {
+    flex-flow: row wrap;
+    gap: var(--vr);
+    margin: 0 0 var(--vr);
+  }
+
+  .reg-info p,
+  .reg-shirts div p,
+  .reg-shirts-event div {
+    flex: 0 1 calc(50% - var(--vr) / 2);
+    margin: 0;
+  }
+
+  .reg-shirts-event label {
+    margin: 0;
+    padding: var(--vr) var(--vr) 0;
+  }
+
+  .reg-shirts-event hr.split {
+    margin-bottom: calc(var(--vr) * -2);
+  }
 }
 
 @media (--medium) {
