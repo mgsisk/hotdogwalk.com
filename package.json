@@ -7,12 +7,13 @@
     "defaults"
   ],
   "scripts": {
-    "prepublishOnly": "npm run make",
+    "prepublishOnly": "astro build",
+    "prestart": "astro build",
+    "pretest": "astro build",
     "publish": "wrangler pages deploy",
-    "dev": "wrangler types; wrangler pages dev --live-reload",
-    "make": "astro build",
+    "start": "wrangler types; wrangler pages dev --live-reload",
     "test": "stylelint --fix src/styles; eslint --fix src/scripts functions; tsc --noEmit",
-    "watch": "chokidar 'public/**/*' 'src/**/*' -c 'npm run make'"
+    "watch": "chokidar 'public/**/*' 'src/**/*' -c 'astro build'"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.1.0",
