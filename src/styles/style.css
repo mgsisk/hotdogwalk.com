@@ -1,5 +1,5 @@
-@import url("part/conf.css");
-@import url("part/base.css");
-@import url("part/user.css");
-@import url("part/dogs.css");
-@import url("part/partners.css");
+@import url("component/conf.css");
+@import url("component/base.css");
+@import url("component/user.css");
+@import url("component/dogs.css");
+@import url("component/partners.css");
