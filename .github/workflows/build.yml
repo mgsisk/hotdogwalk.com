@@ -10,7 +10,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
       - run: npm clean-install
-      - run: npx astro build
       - uses: codacy/codacy-analysis-cli-action@master
         with:
           format: sarif
@@ -42,7 +41,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
       - run: npm clean-install
-      - run: npx astro build
       - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
