@@ -7,7 +7,7 @@
     "defaults"
   ],
   "scripts": {
-    "prepublishOnly": "astro build",
+    "prepare": "astro build",
     "prestart": "astro build",
     "pretest": "astro build",
     "publish": "wrangler pages deploy",
