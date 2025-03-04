@@ -1,5 +1,6 @@
 .astro/
 .dev.vars
+.sarif/
 .wrangler
 dist/
 node_modules/
