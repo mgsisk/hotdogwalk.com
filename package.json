@@ -8,16 +8,12 @@
   ],
   "scripts": {
     "posttest": "stylelint --custom-formatter node_modules/stylelint-sarif-formatter/index.js -o .sarif/stylelint.sarif src/styles; eslint -f @microsoft/eslint-formatter-sarif -o .sarif/eslint.sarif src/scripts functions",
-    "prepare": "astro build",
     "prestart": "astro build",
-    "pretest": "astro build",
-    "publish": "wrangler pages deploy",
-    "start": "wrangler types; wrangler pages dev --live-reload",
-    "test": "stylelint --fix src/styles; eslint --fix src/scripts functions; tsc --noEmit",
-    "watch": "chokidar 'public/**/*' 'src/**/*' -c 'astro build'"
+    "pretest": "wrangler types --experimental-include-runtime; astro check",
+    "start": "chokidar 'public/**/*' 'src/**/*' -c 'astro build' & wrangler pages dev --live-reload",
+    "test": "stylelint --fix src/styles; eslint --fix src/scripts functions; tsc --noEmit"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^12.2.3",
     "@astrojs/mdx": "^4.1.0",
     "@astrojs/sitemap": "^3.2.1",
     "astro": "^5.1.4",
@@ -25,7 +21,7 @@
     "stripe": "^17.7.0"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20250109.0",
+    "@astrojs/check": "^0.9.4",
     "@eslint/js": "^9.21.0",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "chokidar-cli": "^3.0.0",
