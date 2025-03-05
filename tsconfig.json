@@ -12,6 +12,6 @@
       "@partner/*": ["src/components/partner/*"],
       "@style/*": ["src/styles/*"]
     },
-    "types": ["@cloudflare/workers-types"]
+    "types": ["./.wrangler/types/runtime.d.ts"]
   }
 }
