@@ -1,10 +1,10 @@
-import cta from "./part/cta.ts";
-import hero from "./part/hero.ts";
-import register from "./part/register.ts";
-import seats from "./part/seats.ts";
-import shirts from "./part/shirts.ts";
-import payment from "./part/payment.js";
-import total from "./part/total.js";
+import cta from "./component/cta.ts";
+import hero from "./component/hero.ts";
+import register from "./component/register.ts";
+import seats from "./component/seats.ts";
+import shirts from "./component/shirts.ts";
+import payment from "./component/payment.js";
+import total from "./component/total.js";
 
 const go = () => {
   if (document.readyState === "loading") {

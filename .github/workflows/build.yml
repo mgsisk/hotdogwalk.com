@@ -3,25 +3,6 @@ name: build
 on: push
 
 jobs:
-  analyze:
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-      - run: npm clean-install
-      - uses: codacy/codacy-analysis-cli-action@master
-        with:
-          format: sarif
-          gh-code-scanning-compat: true
-          max-allowed-issues: 2147483647
-          output: results.sarif
-          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          verbose: true
-      - uses: github/codeql-action/upload-sarif@main
-        with:
-          sarif_file: results.sarif
-
   test:
     runs-on: ubuntu-latest
     steps:
@@ -29,6 +10,9 @@ jobs:
       - uses: actions/setup-node@v4
       - run: npm clean-install
       - run: npm test
+      - uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: .sarif
 
   publish:
     if: github.actor != 'dependabot[bot]'
@@ -36,14 +20,15 @@ jobs:
     needs: test
     environment:
       name: ${{ (github.ref == 'refs/heads/main' && 'production') || 'preview' }}
-      url: https://${{ (github.ref != 'refs/heads/main' && github.ref_name) || '' }}${{ vars.HOST }}
+      url: https://${{ (github.ref == 'refs/heads/main' && '') || github.ref_name }}${{ vars.HOST }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
       - run: npm clean-install
+      - run: npx astro build
       - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-          command: pages deploy dist --project-name=hotdogwalk-com
+          command: pages deploy --project-name=hotdogwalk-com

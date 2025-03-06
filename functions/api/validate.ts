@@ -14,7 +14,6 @@ export interface Env {
 }
 
 type Color = "r" | "o" | "b" | "p";
-type Ticket = "combo" | "event" | "voucher" | "shirt";
 type ShirtSize =
   | "shirts"
   | "shirtm"
@@ -23,47 +22,49 @@ type ShirtSize =
   | "shirtxx"
   | "shirtxxx";
 type Size = "s" | "m" | "l" | "x" | "xx" | "xxx";
+type Ticket = "combo" | "event" | "voucher" | "shirt";
 
-export const onRequestPost: PagesFunction<Env> = async (context) => {
-  const formData = await context.request.formData();
-  const fees = {
-    combo: parseInt(context.env.combo),
-    event: parseInt(context.env.event),
-    voucher: parseInt(context.env.voucher),
-    shirt: parseInt(context.env.shirt),
-    shirts: parseInt(context.env.shirts),
-    shirtm: parseInt(context.env.shirtm),
-    shirtl: parseInt(context.env.shirtl),
-    shirtx: parseInt(context.env.shirtx),
-    shirtxx: parseInt(context.env.shirtxx),
-    shirtxxx: parseInt(context.env.shirtxxx),
-  };
-  const output = {
-    error: 0,
-    total: parseInt(formData.get("donation") as string),
-  };
+const getTotal = (data: FormData, fees: { [index: string]: number }) => {
+  let total = parseInt(data.get("donation") as string);
 
-  if (!formData.get("free2025")) {
-    output.total += fees[formData.get("ticket") as Ticket];
+  if (!data.get("free2025")) {
+    total += fees[data.get("ticket") as Ticket];
   }
 
-  for (const field of formData.entries()) {
+  for (const field of data.entries()) {
     if (!field[0].match(/^shirt(s|m|l|x|xx|xxx)-(r|o|b|p)$/)) {
       continue;
     }
 
-    output.total +=
+    total +=
       parseInt(field[1] as string) *
       fees[field[0].split("-").shift() as ShirtSize];
   }
 
-  if (["voucher", "shirt"].indexOf(formData.get("ticket") as Ticket) > -1) {
-    output.total -= fees.shirt;
+  if (["voucher", "shirt"].indexOf(data.get("ticket") as Ticket) > -1) {
+    total -= fees.shirt;
   }
 
-  if (output.total < 0) {
-    output.total = 0;
-  }
+  return total < 0 ? 0 : total;
+};
+
+export const onRequestPost: PagesFunction<Env> = async (context) => {
+  const formData = await context.request.formData();
+  const output = {
+    error: 0,
+    total: getTotal(formData, {
+      combo: parseInt(context.env.combo),
+      event: parseInt(context.env.event),
+      voucher: parseInt(context.env.voucher),
+      shirt: parseInt(context.env.shirt),
+      shirts: parseInt(context.env.shirts),
+      shirtm: parseInt(context.env.shirtm),
+      shirtl: parseInt(context.env.shirtl),
+      shirtx: parseInt(context.env.shirtx),
+      shirtxx: parseInt(context.env.shirtxx),
+      shirtxxx: parseInt(context.env.shirtxxx),
+    }),
+  };
 
   if (
     ["shirt", "voucher", "event", "combo"].indexOf(
