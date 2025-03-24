@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
-    "@eslint/js": "^9.21.0",
+    "@eslint/js": "^9.23.0",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "chokidar-cli": "^3.0.0",
     "cssnano": "^7.0.6",
