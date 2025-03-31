@@ -9,7 +9,7 @@
   "scripts": {
     "posttest": "stylelint --custom-formatter node_modules/stylelint-sarif-formatter/index.js -o .sarif/stylelint.sarif src/styles; eslint -f @microsoft/eslint-formatter-sarif -o .sarif/eslint.sarif src/scripts functions",
     "prestart": "astro build",
-    "pretest": "wrangler types --experimental-include-runtime; astro check",
+    "pretest": "wrangler types; astro check",
     "start": "chokidar 'public/**/*' 'src/**/*' -c 'astro build' & wrangler pages dev --live-reload",
     "test": "stylelint --fix src/styles; eslint --fix src/scripts functions; tsc --noEmit"
   },
@@ -34,6 +34,6 @@
     "stylelint-sarif-formatter": "^1.0.7",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.26.1",
-    "wrangler": "^3.100.0"
+    "wrangler": "^4.6.0"
   }
 }

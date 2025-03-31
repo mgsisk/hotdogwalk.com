@@ -12,6 +12,6 @@
       "@partner/*": ["src/components/partner/*"],
       "@style/*": ["src/styles/*"]
     },
-    "types": ["./.wrangler/types/runtime.d.ts"]
+    "types": ["./worker-configuration.d.ts"]
   }
 }
