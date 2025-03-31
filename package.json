@@ -14,7 +14,7 @@
     "test": "stylelint --fix src/styles; eslint --fix src/scripts functions; tsc --noEmit"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.1.0",
+    "@astrojs/mdx": "^4.2.3",
     "@astrojs/sitemap": "^3.2.1",
     "astro": "^5.1.4",
     "resend": "^4.1.2",
