@@ -8,7 +8,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
   let seats = parseInt(context.env.seats);
   const year = context.env.open.split("-").shift();
   const count: Record<string, number> | null = await context.env.DB.prepare(
-    `select count() as total, count(case when created <= ? then 1 end) as pre from walk${year}`,
+    `select count() as total, count(case when created <= ? then 1 end) as pre from walk${year} where ticket in ("combo", "event")`,
   )
     .bind(context.env.open.split("T").shift())
     .first();
