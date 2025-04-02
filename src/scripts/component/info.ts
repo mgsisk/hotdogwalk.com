@@ -1,9 +1,11 @@
+type Access = "super" | "vip" | "free" | "general";
 type Ticket = "combo" | "event" | "voucher" | "shirt";
 type Size = "s" | "m" | "l" | "x" | "xx" | "xxx";
 type Color = "r" | "o" | "b" | "p";
 type FetchedData = {
   walker: {
     ticket: Ticket;
+    access: Access;
     fname: string;
     lname: string;
     shirts: Size;
@@ -24,7 +26,7 @@ const go = (data: FetchedData) => {
   }
 
   const parser = new DOMParser();
-  let info = `<div><dl><dt>Registered for</dt><dd>${data.walker.ticket}</dd>`;
+  let info = `<div><dl><dt>Registered for</dt><dd>${data.walker.ticket} — ${data.walker.access}</dd>`;
 
   if (data.walker.shirts) {
     info += `<dt>Event shirt</dt><dd>${data.walker.shirts.toUpperCase()} — ${data.walker.shirtc.toUpperCase()}</dd>`;
