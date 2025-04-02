@@ -112,13 +112,23 @@ const subShirtDog = (element: HTMLTableRowElement): void => {
 };
 
 const checkShirtDog = (form: HTMLFormElement): void => {
-  const ticket = form.ticket.value;
+  const shirtTable: HTMLTableElement | null = form.querySelector("table");
 
-  if (ticket === "combo" || ticket === "event") {
+  shirtTable!.querySelector("caption")!.textContent = "";
+
+  if (form.ticket.value === "combo" || form.ticket.value === "event") {
     form.shirtb.required = !(form.shirtc.value && form.shirts.value);
     form.donation.dispatchEvent(new Event("change"));
 
     return;
+  }
+
+  if (
+    ["voucher", "shirt"].indexOf(form.ticket.value) !== -1 &&
+    shirtTable?.querySelectorAll("input").length === 0
+  ) {
+    shirtTable!.querySelector("caption")!.textContent =
+      "Please add at least one shirt";
   }
 
   form.shirtb.required = form.querySelectorAll("table input").length === 0;
