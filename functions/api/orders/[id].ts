@@ -6,7 +6,7 @@ export interface Env {
 export const onRequestGet: PagesFunction<Env> = async (context) => {
   const year = context.env.open.split("-").shift();
   const walker = await context.env.DB.prepare(
-    `select ticket, fname, lname, shirts, shirtc, price, donation from walk${year} where id = ?`,
+    `select ticket, access, fname, lname, shirts, shirtc, price, donation from walk${year} where id = ?`,
   )
     .bind(context.params.id)
     .first();

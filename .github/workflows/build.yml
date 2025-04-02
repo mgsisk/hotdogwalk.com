@@ -19,8 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     environment:
-      name: ${{ (github.ref == 'refs/heads/main' && 'production') || 'preview' }}
-      url: https://${{ (github.ref == 'refs/heads/main' && '') || github.ref_name }}${{ vars.HOST }}
+      name: ${{ (github.ref_name == 'main' && 'production') || 'preview' }}
+      url: https://${{ (github.ref_name == 'main' && '') || github.ref_name }}${{ vars.HOST }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
