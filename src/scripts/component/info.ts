@@ -1,4 +1,4 @@
-type Access = "super" | "vip" | "free" | "general";
+type Access = "super" | "vip" | "comp" | "general";
 type Ticket = "combo" | "event" | "voucher" | "shirt";
 type Size = "s" | "m" | "l" | "x" | "xx" | "xxx";
 type Color = "r" | "o" | "b" | "p";

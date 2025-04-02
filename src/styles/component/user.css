@@ -427,6 +427,14 @@ nav ul {
   padding: 0;
 }
 
+.reg-shirts caption {
+  text-align: left;
+}
+
+.reg-shirts table {
+  min-width: 50%;
+}
+
 .reg-shirts table button {
   font-size: var(--font-size-00);
   line-height: var(--line-height-00);
