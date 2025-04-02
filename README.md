@@ -1,6 +1,6 @@
 # Kalamazoo Hot Dog Walk
 
-Officialy website for the [Kalamazoo Hot Dog Walk][].
+Official website for the [Kalamazoo Hot Dog Walk][].
 
 ## License
 

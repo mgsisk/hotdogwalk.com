@@ -20,7 +20,7 @@ jobs:
     needs: test
     environment:
       name: ${{ (github.ref_name != 'main' && 'preview') || 'production' }}
-      url: https://${{ github.ref_name != 'main' && github.ref_name }}${{ vars.HOST }}
+      url: https://${{ (github.ref_name != 'main' && github.ref_name) || '' }}${{ vars.HOST }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
