@@ -9,6 +9,6 @@ export default defineConfig({
   image: { experimentalLayout: "responsive" },
   integrations: [
     mdx(),
-    sitemap({ filter: (page) => !page.match(/\/success\//) }),
+    sitemap({ filter: (page) => !page.match(/\/(info|orders|success)\//) }),
   ],
 });
