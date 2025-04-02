@@ -1,0 +1,49 @@
+---
+import Layout from "@layout/Default.astro"
+---
+<Layout title="Orders" excerpt="Order summary for the Kalamazoo Hot Dog Walk event.">
+  <table id="order-summary">
+    <thead>
+      <tr>
+        <th scope="col">Registered</th>
+        <th scope="col">Event</th>
+        <th scope="col">Vouchers</th>
+        <th scope="col">Donations</th>
+        <th scope="col">Comps</th>
+        <th scope="col"><abbr title="Estimated total payout">Payout</abbr></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h2>Shirts</h2>
+  <table id="shirt-summary">
+    <thead>
+      <tr>
+        <th scope="col">Size</th>
+        <th scope="col">Red</th>
+        <th scope="col">Orange</th>
+        <th scope="col">Blue</th>
+        <th scope="col">Purple</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row">Small</th><td></td><td></td><td></td><td></td></tr>
+      <tr><th scope="row">Medium</th><td></td><td></td><td></td><td></td></tr>
+      <tr><th scope="row">Large</th><td></td><td></td><td></td><td></td></tr>
+      <tr><th scope="row">X-Large</th><td></td><td></td><td></td><td></td></tr>
+      <tr><th scope="row">XX-Large</th><td></td><td></td><td></td><td></td></tr>
+      <tr><th scope="row">XXX-Large</th><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+  <h2>Individuals</h2>
+  <ul id="order-individuals"></ul>
+</Layout>
